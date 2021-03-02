@@ -38,6 +38,8 @@ if [ "$system_type" = "Darwin" ]; then
     # $(brew --prefix)/opt/fzf/install
   fi
 
+  # Set MacOS defaults 
+  source $HOME/.macos
 fi
 
 # Update the yadm repo origin URL
