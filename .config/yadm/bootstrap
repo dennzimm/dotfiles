@@ -12,7 +12,7 @@ if [ "$system_type" = "Darwin" ]; then
   if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Installing oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    compaudit | xargs chmod g-w,o-w
+    # compaudit | xargs chmod g-w,o-w
 
     echo "Installing oh-my-zsh Powerlevel10k Theme"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -21,7 +21,6 @@ if [ "$system_type" = "Darwin" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/autoupdate
-    git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
   fi
 
   # install homebrew if it's missing
@@ -37,11 +36,11 @@ if [ "$system_type" = "Darwin" ]; then
     # To install useful key bindings and fuzzy completion:
     # $(brew --prefix)/opt/fzf/install
   fi
-
-  # Set MacOS defaults 
-  source $HOME/.macos
 fi
 
 # Update the yadm repo origin URL
 echo "Updating the yadm repo origin URL"
 yadm remote set-url origin "git@github.com:dennzimm/dotfiles.git"
+
+# Set MacOS defaults 
+source $HOME/.macos
