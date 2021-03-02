@@ -7,52 +7,20 @@ else # macOS `ls`
 	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
 
-# Get week number
-alias week='date +%V'
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+# Lock the screen (when going AFK)
+alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
 
 # Generate a secure password and copy it to clipboard
 alias genpw='LC_ALL=C tr -dc "[:alnum:]" < /dev/urandom | head -c 20 | pbcopy'
 
-alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
-
-# Docker
-alias dcu='docker-compose up -d'
-alias dcs='docker-compose stop'
-alias dc='docker-compose'
-alias dm='docker-machine'
-alias dsa='docker stop $(docker ps -q)'
-alias drac='docker rm $(docker ps -q -a)'
-alias drai='docker rmi $(docker images -q -a)'
-alias drav='docker volume rm $(docker volume ls -qf dangling=true)'
-alias dclean='docker stop $(docker ps -q) && docker rm $(docker ps -q -a) && docker rmi $(docker images -q -a) && docker volume rm $(docker volume ls -qf dangling=true) && docker system prune'
-
-# NPM
-alias nout='npm outdated -g'
-alias nls='npm list -g --depth 0'
-alias nua='sudo npm cache clean -f && sudo npm install -g npm@latest --no-cache && npm update -g'
-
-# Yarn
-alias y='yarn'
-alias ys='yarn start'
-alias yb='yarn build'
-alias yt='yarn test'
-alias yci='yarn cache clean && rm -rf node_modules/ && yarn'
-alias yib='yarn && yarn build'
-alias ybs='yarn build && serve dist/'
-alias yibs='yarn && yarn build && serve dist/'
-
-# Git
-alias g="git"
-alias gi="git init && gac 'Initial commit'"
-alias gac="git add . && git commit -m" # + commit message
-alias gs="git status" # + remote & branch names
-alias gp="git push" # + remote & branch names
-alias gl="git pull" # + remote & branch names
-alias gb="git branch" # + branch name
-alias gc="git checkout" # + branch name
-alias gcb="git checkout -b" # + branch name
-# Delete all remote tracking Git branches where the upstream branch has been deleted
-alias git_prune="git fetch --prune && git branch -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -d"
+# Get week number
+alias week='date +%V'
 
 # Files & Dirs
 alias ..="cd .."
@@ -62,11 +30,6 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias rmd="rm -rf "
-
-# Shortcuts
-alias dl="cd ~/Downloads"
-alias dev="cd ~/Development"
-alias dt="cd ~/Desktop"
 
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
@@ -86,8 +49,49 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
+# Shortcuts
+alias dl="cd ~/Downloads"
+alias dev="cd ~/Development"
+alias dt="cd ~/Desktop"
+
+# Git
+alias g="git"
+alias gi="git init && gac 'Initial commit'"
+alias gac="git add . && git commit -m" # + commit message
+alias gs="git status" # + remote & branch names
+alias gp="git push" # + remote & branch names
+alias gl="git pull" # + remote & branch names
+alias gb="git branch" # + branch name
+alias gc="git checkout" # + branch name
+alias gcb="git checkout -b" # + branch name
+# Delete all remote tracking Git branches where the upstream branch has been deleted
+alias git_prune="git fetch --prune && git branch -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -d"
+
+# Docker
+alias dc='docker-compose '
+alias dcu='docker-compose up -d'
+alias dcs='docker-compose stop'
+alias dm='docker-machine '
+alias dsa='docker stop $(docker ps -q)'
+alias drac='docker rm $(docker ps -q -a)'
+alias drai='docker rmi $(docker images -q -a)'
+alias drav='docker volume rm $(docker volume ls -qf dangling=true)'
+alias dclean='docker stop $(docker ps -q) && docker rm $(docker ps -q -a) && docker rmi $(docker images -q -a) && docker volume rm $(docker volume ls -qf dangling=true) && docker system prune'
+
+# NPM
+alias nout='npm outdated -g'
+alias nls='npm list -g --depth 0'
+alias nua='sudo npm cache clean -f && sudo npm install -g npm --no-cache && npm update -g'
+
+# Yarn
+alias y='yarn'
+alias ys='yarn start'
+alias yb='yarn build'
+alias yt='yarn test'
+alias yci='yarn cache clean && rm -rf node_modules/ && yarn'
+alias yib='yarn && yarn build'
+alias ybs='yarn build && serve dist/'
+alias yibs='yarn && yarn build && serve dist/'
 
 # Postgres
 alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
@@ -103,9 +107,6 @@ alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
-# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 # Google Chrome
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
@@ -139,9 +140,6 @@ alias spoton="sudo mdutil -a -i on"
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
-# Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
