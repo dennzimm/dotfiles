@@ -1,0 +1,45 @@
+#!/bin/sh
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+  # install xcode-select if it's missing
+  if ! command -v xcode-select -p >/dev/null 1>&1; then
+    echo "Installing xcode-select"
+    xcode-select --install
+  fi
+
+  # install oh-my-zsh if it's missing
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    compaudit | xargs chmod g-w,o-w
+
+    echo "Installing oh-my-zsh Powerlevel10k Theme"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+    echo "Installing oh-my-zsh plugins"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/autoupdate
+    git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
+  fi
+
+  # install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+
+    # To install useful key bindings and fuzzy completion:
+    # $(brew --prefix)/opt/fzf/install
+  fi
+
+fi
+
+# Update the yadm repo origin URL
+echo "Updating the yadm repo origin URL"
+yadm remote set-url origin "git@github.com:dennzimm/dotfiles.git"
