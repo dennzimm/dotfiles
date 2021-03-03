@@ -39,6 +39,11 @@ if [ "$system_type" = "Darwin" ]; then
 
   # To install useful key bindings and fuzzy completion:
   # $(brew --prefix)/opt/fzf/install
+
+  if [ ! -d "$HOME/.nvm" ]; then
+    echo "Installing nvm"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+  fi
 fi
 
 # Update the yadm repo origin URL
