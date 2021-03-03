@@ -1,4 +1,8 @@
 #!/bin/sh
+
+source $HOME/.config/helpers.sh
+
+
 system_type=$(uname -s)
 
 if [ "$system_type" = "Darwin" ]; then
@@ -12,16 +16,15 @@ if [ "$system_type" = "Darwin" ]; then
   if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Installing oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    # compaudit | xargs chmod g-w,o-w
-
-    echo "Installing oh-my-zsh Powerlevel10k Theme"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-    echo "Installing oh-my-zsh plugins"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/autoupdate
   fi
+
+  echo "Installing oh-my-zsh Powerlevel10k Theme"
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh}/themes/powerlevel10k
+
+  echo "Installing oh-my-zsh plugins"
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh}/plugins/zsh-autosuggestions
+  git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-$HOME/.config/oh-my-zsh}/plugins/autoupdate
 
   # install homebrew if it's missing
   if ! command -v brew >/dev/null 2>&1; then
@@ -32,10 +35,10 @@ if [ "$system_type" = "Darwin" ]; then
   if [ -f "$HOME/.Brewfile" ]; then
     echo "Updating homebrew bundle"
     brew bundle --global
-
-    # To install useful key bindings and fuzzy completion:
-    # $(brew --prefix)/opt/fzf/install
   fi
+
+  # To install useful key bindings and fuzzy completion:
+  # $(brew --prefix)/opt/fzf/install
 fi
 
 # Update the yadm repo origin URL
