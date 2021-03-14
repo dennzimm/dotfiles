@@ -31,24 +31,24 @@ cask "google-chrome"
 cask "handbrake"
 cask "insomnia"
 cask "iterm2"
+cask "kap"
 cask "keka"
 cask "losslesscut"
 cask "maccy"
 cask "macdown"
+cask "rectangle"
 cask "sequel-ace"
 cask "slack"
 cask "spotify"
 cask "suspicious-package"
 cask "tor-browser"
-cask "vagrant"
-cask "virtualbox-extension-pack"
 cask "virtualbox"
+cask "virtualbox-extension-pack"
 cask "visual-studio-code"
 cask "vlc"
 
 # Font Cask
 cask "font-fira-code-nerd-font"
-cask "font-hack-nerd-font-mono"
 cask "font-hack-nerd-font"
 cask "font-hack"
 cask "font-victor-mono"
@@ -71,19 +71,17 @@ brew "gnu-tar"
 brew "gnutls"
 brew "grep"
 brew "htop"
-brew "kap"
 brew "mas"
 brew "mackup"
 brew "moreutils"
 brew "nmap"
-brew "node"
+# brew "node" --> nvm
 brew "openssh"
 brew "openssl"
 brew "packer-completion"
 brew "packer"
 brew "pidof"
 brew "pstree"
-brew "rectangle"
 brew "rename"
 brew "rlwrap"
 brew "rsync"
@@ -106,16 +104,15 @@ brew "imagemagick"
 brew "youtube-dl"
 
 # Archive & Git
+brew "git"
 brew "gh"
 brew "git-extras"
 brew "git-lfs"
-brew "git"
 brew "hub"
 brew "jesseduffield/lazygit/lazygit"
 brew "lazygit"
 brew "p7zip"
 brew "tig"
-brew "unrar"
 brew "xz"
 
 # Extract rpm file content with rpm2cpio *.rpm | cpio -ivd
@@ -135,17 +132,14 @@ brew "go"
 brew "heroku/brew/heroku"
 brew "kind"
 brew "openjdk"
-brew "pip-completion"
 brew "python"
+brew "pip-completion"
 brew "rbenv"
 brew "ruby"
-brew "vagrant-completion"
+brew "whalebrew"
 brew "yarn"
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
-
-# GitLab Pages
-brew "hugo"
+# brew "zsh-autosuggestions" --> installed with oh-my-zhs 
+# brew "zsh-syntax-highlighting" --> installed with oh-my-zhs 
 
 # App Store
 mas "Affinity Designer", id: 824171161
@@ -155,5 +149,5 @@ mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "uBlock", id: 1385985095
+# mas "uBlock", id: 1385985095
 mas "Xcode", id: 497799835
